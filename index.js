@@ -58,7 +58,19 @@ app.post("/message",async(req,res)=>{
     try{
          await Message.create({fullName,email,mobile,subject,message})   
           res.status(200).json({message:"message is store successfully"})
-    }catch{
+    }catch(error){
+         res.status(500).json({error:error})
+    }
+
+
+})
+
+app.get("/getmessages",async(req,res)=>{
+    
+    try{
+        const messages= await Message.find()   
+          res.status(200).json({data:messages})
+    }catch(error){
          res.status(500).json({error:error})
     }
 
