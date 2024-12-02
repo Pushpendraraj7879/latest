@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
 const adminSchema=new mongoose.Schema({
-    message:{
+    text:{
         type:String,
         required:true
     }
