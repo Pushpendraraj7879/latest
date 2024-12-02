@@ -3,6 +3,8 @@ const app= express()
 const mongoose=require("mongoose")
 const Admin=require("./models/admin")
 const Message=require("./models/message")
+const Number=require("./models/number")
+const Text=require("./models/text")
 const cors=require("cors")
 require("dotenv").config()
 app.use(cors({
@@ -65,7 +67,7 @@ app.post("/message",async(req,res)=>{
 
 })
 
-app.get("/getmessages",async(req,res)=>{
+app.get("/getmessage",async(req,res)=>{
     
     try{
         const messages= await Message.find()   
@@ -76,6 +78,72 @@ app.get("/getmessages",async(req,res)=>{
 
 
 })
+
+
+
+app.post("/number",async(req,res)=>{
+    console.log(req.body)
+    const {number}=req.body
+    if(!number){
+        res.status(400).json({message:"number require"})
+    } 
+
+    try{
+         await Number.create({number})   
+          res.status(200).json({message:"number is store successfully"})
+    }catch(error){
+         res.status(500).json({error:error})
+    }
+
+
+})
+
+app.get("/getnumber",async(req,res)=>{
+    
+    try{
+        const numbers= await Number.find()   
+          res.status(200).json({data:numbers})
+    }catch(error){
+         res.status(500).json({error:error})
+    }
+
+
+})
+
+app.post("/text",async(req,res)=>{
+    console.log(req.body)
+    const {text}=req.body
+    if(!text){
+        res.status(400).json({message:"message require"})
+    } 
+
+    try{
+         await Text.create({text})   
+          res.status(200).json({message:"message is store successfully"})
+    }catch(error){
+         res.status(500).json({error:error})
+    }
+
+
+})
+
+app.get("/gettext",async(req,res)=>{
+    
+    try{
+        const messages= await Text.find()   
+          res.status(200).json({data:messages})
+    }catch(error){
+         res.status(500).json({error:error})
+    }
+
+
+})
+
+
+
+
+
+
 const Port=3001
 
 app.listen(Port,()=>{
