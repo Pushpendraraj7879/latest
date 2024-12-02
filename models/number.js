@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
 const adminSchema=new mongoose.Schema({
-    mobile:{
+    number:{
         type:String,
         required:true
     }
